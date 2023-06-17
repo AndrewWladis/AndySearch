@@ -15,12 +15,27 @@ const styles = StyleSheet.create({
         color: midBlue,
         textDecorationLine: 'underline'
     },
+    aiResult: {
+        width: '100%',
+        borderColor: midBlue,
+        borderWidth: 2,
+        borderRadius: 25,
+        backgroundColor: blackColor,
+        alignSelf: 'center',
+        maxHeight: 150,
+    },
+    aiText: {
+        textAlign: 'center',
+        fontSize: 22,
+        padding: 15,
+        color: 'white',
+    },
     container: {
-      flex: 1,
-      backgroundColor: blackColor,
-      alignItems: 'center',
-      paddingTop: '50%',
-      padding: 10
+        flex: 1,
+        backgroundColor: blackColor,
+        alignItems: 'center',
+        paddingTop: '50%',
+        padding: 10
     },
     controls: {
         height: '9%',
@@ -72,6 +87,12 @@ const styles = StyleSheet.create({
         width: '100%',
         margin: 5,
         paddingRight: 7
+    },
+    results: { 
+        flex: 1, 
+        backgroundColor: '#1a1a1a', 
+        paddingHorizontal: 5, 
+        paddingTop: 5
     },
     resultscontainer: {
         flex: 1,

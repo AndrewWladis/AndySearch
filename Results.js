@@ -3,10 +3,28 @@ import React, { useEffect, useState } from 'react';
 import styles from './Styles';
 import LightBar from './LightBar';
 import Footer from './Footer';
+import { Configuration, OpenAIApi } from "openai";
+
+const configuration = new Configuration({
+    organization: "org-ElxhBoDrwZrCYkMxuZnAFit0",
+    apiKey: "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",
+});
+
+async function AIRes(text) {
+    const openai = new OpenAIApi(configuration);
+    
+    const result = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user", content: text }],
+    });
+
+    return result.data.choices[0].message.content;
+}
 
 export default function Results({ route, navigation }) {
   const [isLoad, setLoad] = useState(false);
   const [data, setData] = useState({});
+  const [aiResult, setAiResult] = useState("Loading...");
   const [purpleLinks, setPurpleLinks] = useState([]);
 
   const handleData = (bruh) => {
@@ -29,6 +47,9 @@ export default function Results({ route, navigation }) {
       .catch(error => {
         console.error(error);
       });
+
+    AIRes(route.params.query)
+      .then(text => setAiResult(text))
   }, [])
 
   useEffect(() => {
@@ -37,7 +58,10 @@ export default function Results({ route, navigation }) {
 
 
   return (
-    <View style={{ flex: 1,}}>
+    <View style={styles.results}>
+      <ScrollView style={styles.aiResult}>
+          <Text style={styles.aiText}>{aiResult}</Text>
+      </ScrollView>
       <ScrollView style={styles.resultscontainer} indicatorStyle="white">
         {isLoad ? data.map((ele, index) => (
           <View style={styles.result}>
